@@ -265,9 +265,9 @@ def _add_rpm_repos():
             repo_url = "http://download.fedora.redhat.com"
             repo_path = "/pub/epel/5/i386/epel-release-5-4.noarch.rpm"
             output = sudo('rpm -Uvh {0}{1}'.format(repo_url, repo_path))
-            pkg_name = 'epel-release-5-4.noarch'
-            installed = "is already installed"
-            if output.failed and not (output.startswith('package') and pkg_name in output and installed in output):
+            newer = "(which is newer than epel-release-5-4.noarch) is already installed"
+            installed = "package epel-release-5-4.noarch is already installed"
+            if output.failed and not (newer in output or installed in output):
                 abort(output)
         # Install the FrameOS RBEL Yum Repository.
         with settings(hide('warnings', 'running'), warn_only=True):
