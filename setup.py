@@ -19,7 +19,8 @@ setup(
     url="http://github.com/tobami/littlechef",
     download_url="http://github.com/tobami/littlechef/archives/master",
     keywords=["chef", "devops", "operations", "sysadmin"],
-    install_requires=['fabric>=1.0.2', 'simplejson>=2.1.0'],
+    install_requires=['fabric', 'simplejson>=2.1.0'],
+    dependency_links=['https://github.com/bendyer/fabric/zipball/master#egg=fabric'],
     packages=['littlechef'],
     package_data={
         'littlechef': ['search.rb', 'solo.rb', 'parser.rb', 'environment.rb']
