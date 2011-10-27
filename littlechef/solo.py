@@ -96,7 +96,7 @@ def check_distro():
     """Check that the given distro is supported and return the distro type"""
     debian_distros = ['wheezy', 'squeeze', 'lenny']
     ubuntu_distros = ['natty', 'maverick', 'lucid', 'karmic']
-    rpm_distros = ['centos', 'rhel', 'sl']
+    rpm_distros = ['centos', 'rhel', 'sl', 'amazon']
 
     with credentials(
         hide('warnings', 'running', 'stdout', 'stderr'), warn_only=True):
@@ -128,6 +128,9 @@ def check_distro():
         elif 'Arch Linux \\r  (\\n) (\\l)' in output:
             distro = "Arch Linux"
             distro_type = "pacman"
+        elif 'Amazon Linux' in output:
+            distro = "Amazon Linux"
+            distro_type = "rpm"
         else:
             print "Currently supported distros are:"
             print "  Debian: " + ", ".join(debian_distros)
