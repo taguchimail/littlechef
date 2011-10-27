@@ -296,8 +296,8 @@ def _configure_node():
     """Exectutes chef-solo to apply roles and recipes to a node"""
     print("\nCooking...")
     with settings(hide('warnings', 'running'), warn_only=True):
-        output = sudo(
-            'chef-solo -l {0} -j /etc/chef/node.json'.format(env.loglevel))
+        cmd = 'sudo chef-solo -l {0} -j /etc/chef/node.json'.format(env.loglevel)
+        output = local('ssh -A %s "%s"' % (env.host_string, cmd))
         if output.failed:
             if 'chef-solo: command not found' in output:
                 print(
